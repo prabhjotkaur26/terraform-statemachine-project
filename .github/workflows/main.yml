@@ -8,42 +8,36 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    
-    env:
-     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-     aws-region: ap-south-1
-      
-
-    defaults:
-      run:
-        working-directory: .
 
     steps:
-      # 1️⃣ Checkout repo
+      # Checkout
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2️⃣ Setup Terraform
+      # Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
-      # 4️⃣ Terraform Init (REMOTE STATE)
+      # ✅ FIX: Configure AWS
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      # Terraform Init
       - name: Terraform Init
         run: terraform init
 
-      # 5️⃣ Terraform Validate (good practice)
+      # Validate
       - name: Terraform Validate
         run: terraform validate
 
-      # 6️⃣ Terraform Plan
+      # Plan
       - name: Terraform Plan
         run: terraform plan
 
-      # 7️⃣ Terraform Apply
+      # Apply
       - name: Terraform Apply
         run: terraform apply -auto-approve
-
-      # 8️⃣ Show State (PROOF 🔥)
-      - name: Show State
-        run: terraform state list
