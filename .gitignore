@@ -1,4 +1,5 @@
 .terraform/
+.git/
 *.tfstate
 *.tfstate.backup
 *.zip
