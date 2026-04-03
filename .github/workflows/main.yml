@@ -38,6 +38,12 @@ jobs:
       # Plan
       - name: Terraform Plan
         run: terraform plan
+         # - name: Zip Lambda function
+run: |
+    mkdir -p lambdas/lambda_zips
+    zip -j lambdas/lambda_zips/lambda1.zip lambdas/lambda_zips/lambda1.py
+    zip -j lambdas/lambda_zips/lambda2.zip lambdas/lambda_zips/lambda2.py
+    zip -j lambdas/lambda_zips/lambda3.zip lambdas/lambda_zips/lambda3.py
 
       # Apply
       - name: Terraform Apply
