@@ -77,6 +77,10 @@ resource "aws_lambda_function" "lambda3" {
   runtime       = "python3.11"
   role          = aws_iam_role.lambda_role.arn
 }
+filename = "${path.module}/lambdas/lambda_zips/lambda1.zip"
+filename = "${path.module}/lambdas/lambda_zips/lambda2.zip"
+filename = "${path.module}/lambdas/lambda_zips/lambda3.zip"
+
 
 ############################
 # STEP FUNCTION ROLE
