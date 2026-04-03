@@ -59,6 +59,8 @@ resource "aws_lambda_function" "lambda1" {
   handler       = "lambda1.lambda_handler"
   runtime       = "python3.11"
 
+  filename = "${path.module}/lambdas/lambda1.zip"
+
   role = aws_iam_role.lambda_role.arn
 }
 
@@ -67,12 +69,17 @@ resource "aws_lambda_function" "lambda2" {
   handler       = "lambda2.lambda_handler"
   runtime       = "python3.11"
 
+ filename = "${path.module}/lambdas/lambda2.zip"
+
   role = aws_iam_role.lambda_role.arn
 }
 resource "aws_lambda_function" "lambda3" {
   function_name = "lambda3-new"
   handler       = "lambda3.lambda_handler"
   runtime       = "python3.11"
+
+ filename = "${path.module}/lambdas/lambda3.zip"
+
 
   role = aws_iam_role.lambda_role.arn
 }
