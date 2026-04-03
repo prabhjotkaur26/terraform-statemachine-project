@@ -59,7 +59,8 @@ resource "aws_lambda_function" "lambda1" {
   handler       = "lambda1.lambda_handler"
   runtime       = "python3.11"
 
-  filename = "${path.module}/lambdas/lambda1.zip"
+  filename         = data.archive_file.lambda1_zip.output_path
+source_code_hash = data.archive_file.lambda1_zip.output_base64sha256
 
   role = aws_iam_role.lambda_role.arn
 }
@@ -69,7 +70,8 @@ resource "aws_lambda_function" "lambda2" {
   handler       = "lambda2.lambda_handler"
   runtime       = "python3.11"
 
- filename = "${path.module}/lambdas/lambda2.zip"
+filename         = data.archive_file.lambda2_zip.output_path
+source_code_hash = data.archive_file.lambda2_zip.output_base64sha256
 
   role = aws_iam_role.lambda_role.arn
 }
@@ -78,8 +80,8 @@ resource "aws_lambda_function" "lambda3" {
   handler       = "lambda3.lambda_handler"
   runtime       = "python3.11"
 
- filename = "${path.module}/lambdas/lambda3.zip"
-
+ filename         = data.archive_file.lambda3_zip.output_path
+source_code_hash = data.archive_file.lambda3_zip.output_base64sha256
 
   role = aws_iam_role.lambda_role.arn
 }
